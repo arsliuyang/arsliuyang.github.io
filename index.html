@@ -254,7 +254,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/16/IosorAndroid/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/15/wordCloud/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="柳杨">
@@ -273,7 +273,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/16/IosorAndroid/" itemprop="url">JS判断客户端是否是IOS或者ANDROID</a></h1>
+                <a class="post-title-link" href="/2017/12/15/wordCloud/" itemprop="url">echarts字符云小结</a></h1>
         
 
         <div class="post-meta">
@@ -285,8 +285,151 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-16T00:00:00+08:00">
-                2017-12-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-15T00:00:00+08:00">
+                2017-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/echarts/" itemprop="url" rel="index">
+                    <span itemprop="name">echarts</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="echarts3也支持字符云了"><a href="#echarts3也支持字符云了" class="headerlink" title="echarts3也支持字符云了"></a>echarts3也支持字符云了</h1><p>最近在用echarts2做字符云效果，遇到了一些问题，在网上找解决方案时候偶然间发现echarts3居然也可以做字符云效果了<br>效果：<br><img src="/img/wordCloud4.png" alt="图片" title="echarts3字符云"><br>之前用echarts3做字符云效果（type : ‘wordCloud’）都不支持，现在只要我们多导入一个worldcloud.js库就可以用echarts3做字符云了<br>点击查看：<a href="/img/file/worldcloud.js">worldcloud.js</a></p>
+<p>代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;script src=&quot;jquery-1.10.1.min.js&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;script src=&quot;echarts.min.js&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;script src=&quot;worldcloud.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;div id=&quot;main&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">    $(function()&#123;</div><div class="line">        echartsCloud();</div><div class="line">    &#125;)</div><div class="line">function echartsCloud()&#123;</div><div class="line">    var myChart = echarts.init(document.getElementById(&apos;main&apos;));</div><div class="line"></div><div class="line">    myChart.setOption(&#123;</div><div class="line">        title: &#123;</div><div class="line">            text: &apos;echarts3字符云图展示&apos;</div><div class="line">        &#125;,</div><div class="line">        tooltip: &#123;&#125;,</div><div class="line">        series: [&#123;</div><div class="line">            type : &apos;wordCloud&apos;,  //类型为字符云</div><div class="line">            shape:&apos;smooth&apos;,  //平滑</div><div class="line">            gridSize : 2, //网格尺寸</div><div class="line">            size : [&apos;80%&apos;,&apos;80%&apos;],</div><div class="line">            //sizeRange : [ 50, 100 ],  </div><div class="line">            rotationRange : [ 46, 80 ], //旋转范围</div><div class="line">            data:[</div><div class="line">              &#123;&quot;name&quot;: &quot;岁的佛山大佛&quot;,&quot;value&quot;: &quot;200&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;刚刚&quot;,&quot;value&quot;: &quot;156&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;斯蒂芬&quot;,&quot;value&quot;: &quot;122&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;阿萨德&quot;,&quot;value&quot;: &quot;119&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;下次v&quot;,&quot;value&quot;: &quot;108&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;刚刚哈哈哈&quot;,&quot;value&quot;: &quot;101&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;并不百分点&quot;,&quot;value&quot;: &quot;96&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;热天儿童&quot;,&quot;value&quot;: &quot;84&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;月踏入影坛&quot;,&quot;value&quot;: &quot;58&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;体育iu&quot;,&quot;value&quot;: &quot;55&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;OPPO R9S&quot;,&quot;value&quot;: &quot;46&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;二套二厅&quot;,&quot;value&quot;: &quot;28&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;才vbvcnnn&quot;,&quot;value&quot;: &quot;27&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;建行卡号及客户均可&quot;,&quot;value&quot;: &quot;26&quot;&#125;</div><div class="line">                ],</div><div class="line">        &#125;]</div><div class="line">    &#125;);</div><div class="line">&#125;  </div><div class="line"></div><div class="line"></div><div class="line">    &lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<h1 id="最近做了echarts的字符云功能，开发中发现的2个比较难缠的问题总结一下（echarts2）"><a href="#最近做了echarts的字符云功能，开发中发现的2个比较难缠的问题总结一下（echarts2）" class="headerlink" title="最近做了echarts的字符云功能，开发中发现的2个比较难缠的问题总结一下（echarts2）"></a>最近做了echarts的字符云功能，开发中发现的2个比较难缠的问题总结一下（echarts2）</h1><ul>
+<li><p>鼠标挪到图层上tooltip不对<br><img src="/img/wordCloud1.jpg" alt="图片" title="tooltip不对"></p>
+</li>
+<li><p>data中value值小的话图表中文字很小<br><img src="/img/wordCloud2.png" alt="图片" title="data中value值小的话图表中文字很小"></p>
+</li>
+</ul>
+<p>上边两个问题的解决方案就是给字体设置一个统一的大小,其实本来我设置字体大小是想修改问题2的，但是问题1居然也就修改好了。<br><img src="/img/wordCloud3.png" alt="图片" title="代码片段"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">series: [&#123;</div><div class="line">	name: &apos;Google Trends&apos;,</div><div class="line">    type: &apos;wordCloud&apos;,</div><div class="line">    bottom:&apos;0%&apos;,</div><div class="line">    size: [&apos;100%&apos;, &apos;95%&apos;],</div><div class="line">    textRotation : [0, 45, 90, -45],</div><div class="line">    textPadding: 5,</div><div class="line">    autoSize: &#123;</div><div class="line">        enable: true,</div><div class="line">        minSize: 14</div><div class="line">    &#125;,</div><div class="line">    itemStyle:&#123;</div><div class="line">        normal:&#123;</div><div class="line">            textStyle:&#123;</div><div class="line">                fontSize:40</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    data: [</div><div class="line">		&#123;</div><div class="line">            name: &quot;长城&quot;,</div><div class="line">            value: 3</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;]</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/16/IosorAndroid/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="柳杨">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/./img/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="杨仔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/16/IosorAndroid/" itemprop="url">JS判断客户端是否是IOS或者ANDROID</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-16T00:00:00+08:00">
+                2017-11-16
               </time>
             
 
@@ -720,7 +863,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -731,7 +874,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -742,7 +885,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

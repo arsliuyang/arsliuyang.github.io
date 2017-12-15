@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="echarts," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="echarts3也支持字符云了最近在用echarts2做字符云效果，遇到了一些问题，在网上找解决方案时候偶然间发现echarts3居然也可以做字符云效果了效果：之前用echarts3做字符云效果（type : ‘wordCloud’）都不支持，现在只要我们多导入一个worldcloud.js库就可以用echarts3做字符云了点击查看：worldcloud.js 代码：12345678910111">
+<meta name="keywords" content="echarts">
+<meta property="og:type" content="article">
+<meta property="og:title" content="echarts字符云小结">
+<meta property="og:url" content="http://yoursite.com/2017/12/15/wordCloud/index.html">
+<meta property="og:site_name" content="杨仔">
+<meta property="og:description" content="echarts3也支持字符云了最近在用echarts2做字符云效果，遇到了一些问题，在网上找解决方案时候偶然间发现echarts3居然也可以做字符云效果了效果：之前用echarts3做字符云效果（type : ‘wordCloud’）都不支持，现在只要我们多导入一个worldcloud.js库就可以用echarts3做字符云了点击查看：worldcloud.js 代码：12345678910111">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/wordCloud4.png">
+<meta property="og:image" content="http://yoursite.com/img/wordCloud1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/wordCloud2.png">
+<meta property="og:image" content="http://yoursite.com/img/wordCloud3.png">
+<meta property="og:updated_time" content="2017-12-15T09:29:52.861Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="echarts字符云小结">
+<meta name="twitter:description" content="echarts3也支持字符云了最近在用echarts2做字符云效果，遇到了一些问题，在网上找解决方案时候偶然间发现echarts3居然也可以做字符云效果了效果：之前用echarts3做字符云效果（type : ‘wordCloud’）都不支持，现在只要我们多导入一个worldcloud.js库就可以用echarts3做字符云了点击查看：worldcloud.js 代码：12345678910111">
+<meta name="twitter:image" content="http://yoursite.com/img/wordCloud4.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/15/wordCloud/"/>
+
+
+
+
+
+  <title>echarts字符云小结 | 杨仔</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">杨仔</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/15/wordCloud/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="柳杨">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/./img/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="杨仔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">echarts字符云小结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-15T00:00:00+08:00">
+                2017-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/echarts/" itemprop="url" rel="index">
+                    <span itemprop="name">echarts</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="echarts3也支持字符云了"><a href="#echarts3也支持字符云了" class="headerlink" title="echarts3也支持字符云了"></a>echarts3也支持字符云了</h1><p>最近在用echarts2做字符云效果，遇到了一些问题，在网上找解决方案时候偶然间发现echarts3居然也可以做字符云效果了<br>效果：<br><img src="/img/wordCloud4.png" alt="图片" title="echarts3字符云"><br>之前用echarts3做字符云效果（type : ‘wordCloud’）都不支持，现在只要我们多导入一个worldcloud.js库就可以用echarts3做字符云了<br>点击查看：<a href="/img/file/worldcloud.js">worldcloud.js</a></p>
+<p>代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;script src=&quot;jquery-1.10.1.min.js&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;script src=&quot;echarts.min.js&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;script src=&quot;worldcloud.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;div id=&quot;main&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">    $(function()&#123;</div><div class="line">        echartsCloud();</div><div class="line">    &#125;)</div><div class="line">function echartsCloud()&#123;</div><div class="line">    var myChart = echarts.init(document.getElementById(&apos;main&apos;));</div><div class="line"></div><div class="line">    myChart.setOption(&#123;</div><div class="line">        title: &#123;</div><div class="line">            text: &apos;echarts3字符云图展示&apos;</div><div class="line">        &#125;,</div><div class="line">        tooltip: &#123;&#125;,</div><div class="line">        series: [&#123;</div><div class="line">            type : &apos;wordCloud&apos;,  //类型为字符云</div><div class="line">            shape:&apos;smooth&apos;,  //平滑</div><div class="line">            gridSize : 2, //网格尺寸</div><div class="line">            size : [&apos;80%&apos;,&apos;80%&apos;],</div><div class="line">            //sizeRange : [ 50, 100 ],  </div><div class="line">            rotationRange : [ 46, 80 ], //旋转范围</div><div class="line">            data:[</div><div class="line">              &#123;&quot;name&quot;: &quot;岁的佛山大佛&quot;,&quot;value&quot;: &quot;200&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;刚刚&quot;,&quot;value&quot;: &quot;156&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;斯蒂芬&quot;,&quot;value&quot;: &quot;122&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;阿萨德&quot;,&quot;value&quot;: &quot;119&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;下次v&quot;,&quot;value&quot;: &quot;108&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;刚刚哈哈哈&quot;,&quot;value&quot;: &quot;101&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;并不百分点&quot;,&quot;value&quot;: &quot;96&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;热天儿童&quot;,&quot;value&quot;: &quot;84&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;月踏入影坛&quot;,&quot;value&quot;: &quot;58&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;体育iu&quot;,&quot;value&quot;: &quot;55&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;OPPO R9S&quot;,&quot;value&quot;: &quot;46&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;二套二厅&quot;,&quot;value&quot;: &quot;28&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;才vbvcnnn&quot;,&quot;value&quot;: &quot;27&quot;&#125;,</div><div class="line">              &#123;&quot;name&quot;: &quot;建行卡号及客户均可&quot;,&quot;value&quot;: &quot;26&quot;&#125;</div><div class="line">                ],</div><div class="line">        &#125;]</div><div class="line">    &#125;);</div><div class="line">&#125;  </div><div class="line"></div><div class="line"></div><div class="line">    &lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<h1 id="最近做了echarts的字符云功能，开发中发现的2个比较难缠的问题总结一下（echarts2）"><a href="#最近做了echarts的字符云功能，开发中发现的2个比较难缠的问题总结一下（echarts2）" class="headerlink" title="最近做了echarts的字符云功能，开发中发现的2个比较难缠的问题总结一下（echarts2）"></a>最近做了echarts的字符云功能，开发中发现的2个比较难缠的问题总结一下（echarts2）</h1><ul>
+<li><p>鼠标挪到图层上tooltip不对<br><img src="/img/wordCloud1.jpg" alt="图片" title="tooltip不对"></p>
+</li>
+<li><p>data中value值小的话图表中文字很小<br><img src="/img/wordCloud2.png" alt="图片" title="data中value值小的话图表中文字很小"></p>
+</li>
+</ul>
+<p>上边两个问题的解决方案就是给字体设置一个统一的大小,其实本来我设置字体大小是想修改问题2的，但是问题1居然也就修改好了。<br><img src="/img/wordCloud3.png" alt="图片" title="代码片段"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">series: [&#123;</div><div class="line">	name: &apos;Google Trends&apos;,</div><div class="line">    type: &apos;wordCloud&apos;,</div><div class="line">    bottom:&apos;0%&apos;,</div><div class="line">    size: [&apos;100%&apos;, &apos;95%&apos;],</div><div class="line">    textRotation : [0, 45, 90, -45],</div><div class="line">    textPadding: 5,</div><div class="line">    autoSize: &#123;</div><div class="line">        enable: true,</div><div class="line">        minSize: 14</div><div class="line">    &#125;,</div><div class="line">    itemStyle:&#123;</div><div class="line">        normal:&#123;</div><div class="line">            textStyle:&#123;</div><div class="line">                fontSize:40</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    data: [</div><div class="line">		&#123;</div><div class="line">            name: &quot;长城&quot;,</div><div class="line">            value: 3</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;]</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/echarts/" rel="tag"># echarts</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/16/IosorAndroid/" rel="next" title="JS判断客户端是否是IOS或者ANDROID">
+                <i class="fa fa-chevron-left"></i> JS判断客户端是否是IOS或者ANDROID
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/./img/tx.jpg"
+               alt="柳杨" />
+          <p class="site-author-name" itemprop="name">柳杨</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#echarts3也支持字符云了"><span class="nav-number">1.</span> <span class="nav-text">echarts3也支持字符云了</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最近做了echarts的字符云功能，开发中发现的2个比较难缠的问题总结一下（echarts2）"><span class="nav-number">2.</span> <span class="nav-text">最近做了echarts的字符云功能，开发中发现的2个比较难缠的问题总结一下（echarts2）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">柳杨</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
